@@ -1,0 +1,87 @@
+body {
+  height: 100%;
+  background-color: whitesmoke;
+}
+
+.box {
+  width: 100vw;
+  height: 100vh;
+}
+
+.pagination {
+  user-select: none;
+}
+
+button,
+button:focus {
+  font-size: 17px;
+  padding: 5px 15px;
+  border-radius: 0.7rem;
+  background-image: linear-gradient(rgb(214, 202, 254), rgb(158, 129, 254));
+  border: 2px solid rgb(50, 50, 50);
+  border-bottom: 5px solid rgb(50, 50, 50);
+  box-shadow: 0px 1px 6px 0px rgb(158, 129, 254);
+  transform: translate(0, -3px);
+  cursor: pointer;
+  transition: 0.2s;
+  transition-timing-function: linear;
+  user-select: none;
+}
+
+button:active {
+  transform: translate(0, 0);
+  border-bottom: 2px solid rgb(50, 50, 50);
+}
+
+.link,
+.link:focus {
+  text-decoration: none;
+  font-size: 17px;
+  color: black;
+  border-radius: 0.7rem;
+  padding: 5px 15px;
+  background-image: linear-gradient(rgb(214, 202, 254), rgb(158, 129, 254));
+  border: 2px solid rgb(50, 50, 50);
+  border-bottom: 5px solid rgb(50, 50, 50);
+  box-shadow: 0px 1px 6px 0px rgb(158, 129, 254);
+  transform: translate(0, -3px);
+  cursor: pointer;
+  transition: 0.2s;
+  transition-timing-function: linear;
+  user-select: none;
+}
+
+.link:active {
+  transform: translate(0, 0);
+  border-bottom: 2px solid rgb(50, 50, 50);
+}
+
+.favorites {
+  user-select: none;
+  cursor: pointer;
+  font-size: 25px;
+}
+.favorites:hover {
+  transform: scale(1.2);
+  transition: 0.15s ease-in-out;
+}
+.favorites:active {
+  transform: scale(1);
+  transition: 0.15s ease-in-out;
+  cursor: grabbing;
+}
+
+img {
+  width: 150px;
+}
+
+.postContainer {
+  width: 300px;
+  overflow: hidden;
+}
+.postContainer:hover {
+  transform: scale(1.05);
+  transition: 0.15s ease-in-out;
+}
+
+/*# sourceMappingURL=Style.css.map */
