@@ -42,7 +42,7 @@ const BlogApp = () => {
                     <Route element={<CreateAccountPage/>} path='/createAccount'/>
                     <Route element={<CreatePostPage/>} path='/createPost'/>
                     <Route element={<FavoritesPage/>} path='/favorites'/>
-                    <Route element={<UpdatePostPage/>} path='/updatePost/:username/'/>
+                    <Route element={<UpdatePostPage/>} path='/updatePost/:username/:id'/>
                 </Routes>
             </BrowserRouter>
         </>

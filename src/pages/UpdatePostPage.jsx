@@ -17,13 +17,13 @@ const UpdatePostPage = () => {
     const [updateOn, setUpdateOn] = useState(false)
     const nav = useNavigate()
 
-    useEffect(() => {
-        fetchUrl.get(`/getuserposts/updatePost/${params.username}`)
-            .then(response => {
-                console.log(response)
-                setUserPosts(response.data)
-            })
-    }, [])
+    // useEffect(() => {
+    //     fetchUrl.get(`/getuserposts/${params.username}`)
+    //         .then(response => {
+    //             console.log(response)
+    //             setUserPosts(response.data)
+    //         })
+    // }, [])
 
     useEffect(() => {
         if (location.state && location.state.post) {
