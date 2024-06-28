@@ -26,8 +26,8 @@ const Toolbar = () => {
                 )}
                 {loggedIn && (
                     <>
-                        <Link className='link' to='/createPost'>Create post</Link>
-                        <Link className='link' to='/UpdatePost'>Update post</Link>
+                        <Link className='link' to='/CreatePost'>Create post</Link>
+                        <Link className='link' to={`/UpdatePost/${loggedIn}`}>Update post</Link>
                         <Link className='link' to='/Favorites'>Favorites({favorites.length})</Link>
                     </>
                 )}

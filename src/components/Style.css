@@ -1,8 +1,23 @@
 body {
+  width: 100%;
   height: 100%;
-  background-color: whitesmoke;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #121212;
+  background: linear-gradient(135deg, #121212 25%, #1a1a1a 25%, #1a1a1a 50%, #121212 50%, #121212 75%, #1a1a1a 75%, #1a1a1a);
+  background-size: 40px 40px;
+  animation: move 4s linear infinite;
 }
 
+@keyframes move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 40px 40px;
+  }
+}
 .box {
   width: 100vw;
   height: 100vh;
@@ -72,16 +87,81 @@ button:active {
 }
 
 img {
-  width: 150px;
+  box-sizing: border-box;
+  height: 200px;
+  max-width: 100%;
+  overflow: auto;
+}
+
+.imgByTitle {
+  box-sizing: border-box;
+  height: 250px;
+  max-width: 100%;
+  overflow: auto;
 }
 
 .postContainer {
-  width: 300px;
-  overflow: hidden;
+  box-sizing: border-box;
+  width: 500px;
+  height: 400px;
+  background: rgba(217, 217, 217, 0.58);
+  border: 1px solid white;
+  box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(6px);
+  border-radius: 17px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s;
+  user-select: none;
+  color: black;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 .postContainer:hover {
+  border: 1px solid black;
   transform: scale(1.05);
-  transition: 0.15s ease-in-out;
+}
+.postContainer:active {
+  transform: scale(0.95) rotateZ(1.7deg);
+}
+
+.postContainerByTitle {
+  box-sizing: border-box;
+  width: 80%;
+  height: 400px;
+  background: rgba(217, 217, 217, 0.58);
+  border: 1px solid white;
+  box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(6px);
+  border-radius: 17px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s;
+  user-select: none;
+  color: black;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.postContainerByTitle:hover {
+  border: 1px solid black;
+  transform: scale(1.02);
+}
+.postContainerByTitle:active {
+  transform: scale(0.99) rotateZ(0.5deg);
+}
+
+.time {
+  font-weight: bold;
+}
+
+.title {
+  text-align: left;
+  text-wrap: normal;
+}
+
+.desc {
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 /*# sourceMappingURL=Style.css.map */

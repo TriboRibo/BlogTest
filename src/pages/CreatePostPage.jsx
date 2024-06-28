@@ -2,10 +2,12 @@ import React, {useRef} from 'react';
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import fetchUrl from "../plugins/fetchUrl";
+import mainStore from "../store/mainStore";
 
 const CreatePostPage = () => {
 
     const [error, setError] = useState()
+    const {loggedIn} = mainStore()
 
     const titleRef = useRef()
     const imageRef = useRef()
@@ -31,7 +33,7 @@ const CreatePostPage = () => {
 
         const res = await fetchUrl.post(`/createpost`, post)
         if (res.success) {
-            nav('/')
+            nav(`/updatePost/${loggedIn}`)
         } else {
             setError(res.message)
         }

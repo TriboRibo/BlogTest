@@ -8,14 +8,11 @@ const FavoritesPage = () => {
 
     return (
         <>
-            <div>
-                <h2 className='d-flex justify-content-center'>Favorites</h2>
-                <div className='d-flex flex-wrap gap-2'>
-                    {favorites.map((x, i) => (
-                        <SinglePostComp key={i} post={x}/>
-                    ))}
-                </div>
-
+            <h2 className='d-flex justify-content-center text-white user-select-none'>Favorites</h2>
+            <div className='d-flex justify-content-center flex-wrap gap-2'>
+                {favorites.map((x, i) => (
+                    <SinglePostComp key={i} post={x}/>
+                ))}
             </div>
         </>
     );

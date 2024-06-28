@@ -11,6 +11,7 @@ import CreatePostPage from "./pages/CreatePostPage";
 import FavoritesPage from "./pages/FavoritesPage";
 import mainStore from "./store/mainStore";
 import Filter from "./components/Filter";
+import UpdatePostComp from "./components/UpdatePostComp";
 import UpdatePostPage from "./pages/UpdatePostPage";
 
 const BlogApp = () => {
@@ -42,7 +43,8 @@ const BlogApp = () => {
                     <Route element={<CreateAccountPage/>} path='/createAccount'/>
                     <Route element={<CreatePostPage/>} path='/createPost'/>
                     <Route element={<FavoritesPage/>} path='/favorites'/>
-                    <Route element={<UpdatePostPage/>} path='/updatePost/:username/:id'/>
+                    <Route element={<UpdatePostComp/>} path='/updatePost/:username/:id'/>
+                    <Route element={<UpdatePostPage/>} path='/updatePost/:username/'/>
                 </Routes>
             </BrowserRouter>
         </>

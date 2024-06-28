@@ -1,25 +1,28 @@
 import React, {useEffect, useRef, useState} from 'react';
 import mainStore from "../store/mainStore";
 import SinglePostComp from "./SinglePostComp";
+import fetchUrl from "../plugins/fetchUrl";
+import {useNavigate} from "react-router-dom";
 
 const Filter = () => {
 
-    const {posts, setPosts, postsForFilter, setPostsForFilter} = mainStore()
+    const {posts, setPosts, setCurrentPage, setTotalPages} = mainStore()
 
     const dateFromRef = useRef()
     const dateToRef = useRef()
     const userRef = useRef()
     const titleRef = useRef()
 
-
+    const nav = useNavigate()
 
     function handleFilter() {
-        let filteredPosts = [...postsForFilter]
+
+        let filteredPosts = [...posts]
 
         const filterFrom = dateFromRef.current.value
         const filterTo = dateToRef.current.value
-        const filterName = userRef.current.value
-        const filterTitle = titleRef.current.value
+        const filterName = userRef.current.value.toLowerCase()
+        const filterTitle = titleRef.current.value.toLowerCase()
 
         if (filterFrom){
             filteredPosts = filteredPosts.filter(post => {
@@ -34,13 +37,14 @@ const Filter = () => {
             })
         }
         if (filterName){
-            filteredPosts = filteredPosts.filter(post => post.username.includes(filterName))
+            filteredPosts = filteredPosts.filter(post => post.username.toLowerCase().includes(filterName))
         }
         if (filterTitle){
-            filteredPosts = filteredPosts.filter(post => post.title.includes(filterTitle))
+            filteredPosts = filteredPosts.filter(post => post.title.toLowerCase().includes(filterTitle))
         }
         setPosts(filteredPosts)
-        console.log(filteredPosts)
+        setCurrentPage(1)
+        setTotalPages(Math.ceil(filteredPosts.length / 20))
     }
 
     function clearFilter() {
@@ -48,8 +52,12 @@ const Filter = () => {
         dateToRef.current.value = ''
         userRef.current.value = ''
         titleRef.current.value = ''
-        setPostsForFilter(posts)
-        console.log(posts)
+        fetchUrl.get('/getallposts')
+            .then(res => {
+                setPosts(res.data)
+                setCurrentPage(res.data)
+                setTotalPages(Math.ceil(res.data.length / 20))
+            })
     }
 
     return (
@@ -81,13 +89,6 @@ const Filter = () => {
                         <button onClick={clearFilter}>Clear filter</button>
                     </div>
                 </div>
-
-                {/*<div onClick={handleFilter}>*/}
-                {/*    {postsForFilter.map((x, i) => (*/}
-                {/*        <SinglePostComp key={i} post={x}/>*/}
-                {/*    ))}*/}
-                {/*</div>*/}
-
             </div>
         </>
     );

@@ -1,96 +1,29 @@
-import React, {useEffect, useRef, useState} from 'react';
-import mainStore from "../store/mainStore";
-import {useLocation, useNavigate, useParams} from "react-router-dom";
-import fetchUrl from "../plugins/fetchUrl";
+import React, {useEffect} from 'react';
+import {useParams} from "react-router-dom";
 import SinglePostComp from "../components/SinglePostComp";
+import fetchUrl from "../plugins/fetchUrl";
+import mainStore from "../store/mainStore";
 
 const UpdatePostPage = () => {
 
-    const {singlePost, setSinglePost, userPosts, setUserPosts} = mainStore()
     const params = useParams()
-    const location = useLocation();
-    const [error, setError] = useState()
-
-    const titleRef = useRef()
-    const imageRef = useRef()
-    const descriptionRef = useRef()
-    const [updateOn, setUpdateOn] = useState(false)
-    const nav = useNavigate()
-
-    // useEffect(() => {
-    //     fetchUrl.get(`/getuserposts/${params.username}`)
-    //         .then(response => {
-    //             console.log(response)
-    //             setUserPosts(response.data)
-    //         })
-    // }, [])
+    const {userPosts, setUserPosts} = mainStore()
 
     useEffect(() => {
-        if (location.state && location.state.post) {
-            const post = location.state.post;
-            setSinglePost(post);
-            setUpdateOn(true);
-        } else {
-            fetchPostData();
-        }
-    }, [location.state]);
-
-    useEffect(() => {
-        if (singlePost && titleRef.current && imageRef.current && descriptionRef.current) {
-            titleRef.current.value = singlePost.title;
-            imageRef.current.value = singlePost.image;
-            descriptionRef.current.value = singlePost.description;
-        }
-    }, [singlePost]);
-
-    async function fetchPostData() {
-        const res = await fetchUrl.get(`/getsinglepost/${params.username}/${params.id}`);
-        if (res.success) {
-            setSinglePost(res.data);
-            setUpdateOn(true);
-        } else {
-            setError(res.message);
-        }
-    }
-
-    async function updatePost() {
-        const updatedPost = {
-            image: imageRef.current.value,
-            title: titleRef.current.value,
-            description: descriptionRef.current.value,
-            secretKey: localStorage.getItem('secretKey'),
-            id: params.id,
-        };
-
-        const res = await fetchUrl.post(`/updatepost`, updatedPost);
-        if (res.success) {
-            setUpdateOn(false);
-            nav(`/UpdatePost/${params.username}/${params.id}`);
-        } else {
-            setError(res.message);
-        }
-    }
+        fetchUrl.get(`/getuserposts/${params.username}`)
+            .then(response => {
+                setUserPosts(response.data)
+            });
+    }, [params.username, setUserPosts])
 
     return (
         <>
-            <div className='d-flex flex-column gap-2'>
-                {singlePost && <SinglePostComp post={singlePost} />}
+            <h2 className='d-flex justify-content-center text-white user-select-none'>Posts by {params.username}</h2>
+            <div className='d-flex justify-content-center flex-wrap gap-2'>
+                {userPosts.map((post, index) => (
+                    <SinglePostComp key={index} post={post}/>
+                ))}
             </div>
-
-            <div>
-                {userPosts.map((x, i) => <SinglePostComp key={i} post={x}/>)}
-                <button onClick={() => nav(-1)}>Back</button>
-            </div>
-
-            {updateOn && (
-                <div className="d-flex flex-column p-5">
-                    <input type="text" ref={imageRef} placeholder="image" />
-                    <input type="text" ref={titleRef} placeholder="title" />
-                    <input type="text" ref={descriptionRef} placeholder="description" />
-                    <p>{error}</p>
-                    <button onClick={updatePost}>Update Post</button>
-                </div>
-            )}
         </>
     );
 };

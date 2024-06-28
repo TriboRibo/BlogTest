@@ -14,17 +14,21 @@ const UserPostByName = () => {
     useEffect(() => {
         fetchUrl.get(`/getuserposts/${params.username}`)
             .then(response => {
-                console.log(response)
                 setUserPosts(response.data)
             })
-    }, [])
-
+    }, [params.username, setUserPosts])
 
 
     return (
         <>
-            {userPosts.map((x, i) => <SinglePostComp key={i} post={x}/>)}
-            <button onClick={() => nav(-1)}>Back</button>
+            <div className='d-flex flex-column gap-2 m-1 p-2'>
+                <div className='d-flex gap-2 flex-wrap justify-content-center'>
+                    {userPosts.map((x, i) => <SinglePostComp key={i} post={x}/>)}
+                </div>
+                <div>
+                    <button onClick={() => nav(-1)}>Back</button>
+                </div>
+            </div>
         </>
     );
 };

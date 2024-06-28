@@ -7,20 +7,17 @@ import PaginationComp from "../components/PaginationComp";
 
 const AllPostsPage = () => {
 
-    const {posts, setPosts, currentPage, setCurrentPage, totalPages, setTotalPages, setPostsForFilter} = mainStore()
+    const {posts, setPosts, currentPage, setCurrentPage, totalPages, setTotalPages} = mainStore()
 
     const pageSize = 20
 
     useEffect(() => {
         fetchUrl.get('/getallposts')
             .then(response => {
-                console.log(response)
                 setPosts(response.data)
                 setTotalPages(Math.ceil(response.data.length / pageSize))
-
-                setPostsForFilter(response.data)
             })
-    }, [setPosts, setTotalPages, setPostsForFilter]);
+    }, [setPosts, setTotalPages]);
 
     function handlePageChange(pageNumber) {
         setCurrentPage(pageNumber)
@@ -30,8 +27,8 @@ const AllPostsPage = () => {
 
     return (
         <>
-            <div className='box d-flex flex-column justify-content-between'>
-                <div className='d-flex flex-wrap gap-2'>
+            <div className='d-flex flex-column justify-content-between'>
+                <div className='d-flex flex-wrap gap-2 justify-content-center'>
                     {paginatedPosts.map((x, i) => (
                         <SinglePostComp key={i} post={x}/>
                     ))}

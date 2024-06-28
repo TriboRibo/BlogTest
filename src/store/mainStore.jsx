@@ -1,4 +1,5 @@
 import {create} from 'zustand'
+import fetchUrl from "../plugins/fetchUrl";
 
 const useStore = create((set) => ({
     posts: [],
@@ -54,14 +55,34 @@ const useStore = create((set) => ({
             }
             return {favorites: updatedFavorites}
         }),
+
     removeFavorite: (postId) =>
         set((state) => {
-            const updatedFavorites = state.favorites.filter((post) => post.id !== postId);
+            const updatedFavorites = state.favorites.filter((fav) => fav.id !== postId);
             if (state.loggedIn) {
                 localStorage.setItem(`favorites`, JSON.stringify(updatedFavorites))
             }
             return {favorites: updatedFavorites};
-        })
+        }),
+
+    deletePost: async (postId) => {
+        const secretKey = localStorage.getItem('secretKey')
+        if (!secretKey)  {
+            console.error('Secret key not found')
+            return
+        }
+        const res = await fetchUrl.post(`/deletepost`, {id: postId, secretKey})
+        if (res.success) {
+            set((state) => ({
+                posts: state.posts.filter(p => p.id !== postId),
+                favorites: state.favorites.filter(fav => fav.id !== postId),
+                userPosts: state.userPosts.filter(p => p.id !== postId)
+            }))
+            const updatedFavorites = JSON.parse(localStorage.getItem('favorites')).filter(fav => fav.id !== postId)
+            localStorage.setItem('favorites', JSON.stringify(updatedFavorites))
+        }
+    }
+
 }))
 
 export default useStore
