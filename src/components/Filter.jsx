@@ -66,11 +66,11 @@ const Filter = () => {
                 <div className='d-flex gap-2 align-items-center'>
                     <div className='d-flex gap-2'>
                         <div className='d-flex gap-2'>
-                            <div>From:</div>
+                            <div className='text-white'>From:</div>
                             <input type="date" ref={dateFromRef} placeholder='by date'/>
                         </div>
                         <div className='d-flex gap-2'>
-                            <div>To:</div>
+                            <div className='text-white'>To:</div>
                             <input type="date" ref={dateToRef} placeholder='by date'/>
                         </div>
                     </div>

@@ -73,7 +73,7 @@ const UpdatePostComp = () => {
                     <input type="text" ref={imageRef} placeholder="image" />
                     <input type="text" ref={titleRef} placeholder="title" />
                     <input type="text" ref={descriptionRef} placeholder="description" />
-                    <p>{error}</p>
+                    <p className='text-white'>{error}</p>
                     <button onClick={updatePost}>Update Post</button>
                 </div>
             )}

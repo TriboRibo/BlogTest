@@ -41,7 +41,7 @@ const LogInPage = () => {
                 <div>
                     <input ref={passRef} type="password" placeholder='password'/>
                 </div>
-                <p>{error}</p>
+                <p className='text-white'>{error}</p>
                 <div>
                     <button onClick={logIn}>Log In</button>
                 </div>

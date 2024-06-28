@@ -51,7 +51,7 @@ const CreatePostPage = () => {
                 <div>
                     <input ref={descriptionRef} type="text" placeholder='description'/>
                 </div>
-                <p>{error}</p>
+                <p className='text-white'>{error}</p>
                 <div>
                     <button onClick={createPost}>Create</button>
                 </div>
